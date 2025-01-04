@@ -27,3 +27,58 @@ document.getElementById("minipc").onclick = function() {
 document.getElementById("contact-btn").onclick = function() {
     location.href = '#contact';
 }
+
+
+// gallery
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+
+// email
+
+// Initialize EmailJS (put your user ID here)
+
+(function(){
+    emailjs.init('DHpYIYNH1qzPgDwOI');
+  })();
+  
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+  
+    // Collect form data
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+  
+    // Set template parameters (replace the placeholders with actual values)
+    const templateParams = {
+      to_name: 'TECHK7',        // Replace with your name or the recipient's name
+      from_name: name,             // Name from the form input
+      from_email: email,           // Email from the form input
+      message: message             // Message from the form input
+    };
+  
+    // Send the email using EmailJS
+    emailjs.send('service_73tzr5h', 'template_c26o9z7', templateParams)
+      .then(function(response) {
+        alert('Message Sent Successfully');
+      }, function(error) {
+        alert('Failed to Send Message: ' + error);
+      });
+  });
+  
